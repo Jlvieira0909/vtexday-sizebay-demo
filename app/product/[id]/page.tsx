@@ -1,8 +1,8 @@
 import { products } from "@/lib/products";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import Link from "next/link";
 import ProductGallery from "../../../components/ProductGallery";
+import SizebayScript from "../../../components/SizebayScript";
 
 export function generateStaticParams() {
   return products.map((product) => ({
@@ -24,11 +24,8 @@ export default async function ProductPage({
 
   return (
     <div className="max-w-5xl mx-auto">
-      <script
-        defer
-        id="sizebay-vfr-v4"
-        src="https://static.sizebay.technology/7707/prescript.js"
-      ></script>
+      <SizebayScript productId={product.id} />
+
       <Link
         href="/"
         className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-950 mb-6 transition-colors"
@@ -102,20 +99,6 @@ export default async function ProductPage({
             </button>
           </div>
         </div>
-
-        <Script
-          id="sizebay-integration"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.Sizebay = window.Sizebay || {};
-              window.Sizebay.product = {
-                 id: "${product.id}",
-                 permalink: "https://www.sizebay-vtexday2026.com/${product.id}"
-              };
-            `,
-          }}
-        />
       </div>
     </div>
   );
