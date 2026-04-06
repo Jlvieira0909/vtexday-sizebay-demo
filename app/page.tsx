@@ -1,41 +1,50 @@
+// app/page.tsx - RESTAURADO E AJUSTADO
+
 import Link from "next/link";
 import { products } from "@/lib/products";
 
 export default function Home() {
   return (
-    <div className="space-y-6 md:space-y-8">
-      <div className="text-center space-y-2 md:space-y-4">
-        <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+    <div className="space-y-10 md:space-y-12">
+      <div className="text-center space-y-3 md:space-y-4 max-w-3xl mx-auto">
+        <h1 className="text-3xl md:text-5xl font-extrabold text-gray-950 tracking-tighter">
           Catálogo
         </h1>
-        <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto px-2">
-          Explore nossa coleção e experimente as soluções da Sizebay.
+        <p className="text-base md:text-lg text-gray-600 px-2 leading-relaxed">
+          Explore nossa coleção exclusiva e experimente as soluções de Provador
+          Virtual e Tabela de Medidas da Sizebay.
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 mt-6 md:mt-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mt-10 md:mt-16">
         {products.map((product) => (
           <Link
             key={product.id}
             href={`/product/${product.id}`}
-            className="group flex flex-col bg-white rounded-xl md:rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+            // VOLTA A SER O CARD UNIFICADO PERFEITO, SEM SEPARAR AS INFORMAÇÕES
+            className="group flex flex-col bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer"
           >
+            {/* CONTAINER DA IMAGEM: AGORA PREENCHE TUDO ATÉ O TOPO */}
             <div className="relative aspect-[3/4] w-full bg-gray-100 overflow-hidden">
               <img
-                src={product.image}
+                // USANDO A PRIMEIRA IMAGEM DO ARRAY (products.images[0])
+                src={product.images[0]}
                 alt={product.name}
-                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                // CLASSES PARA COBRIR E ALINHAR AO TOPO, REMOVENDO O PADDING FEIO
+                className="object-cover object-top w-full h-full group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <div className="p-3 md:p-5 flex flex-col flex-grow">
-              <h3 className="text-xs md:text-sm font-semibold text-gray-900 mb-1 md:mb-2 line-clamp-2">
+
+            {/* CONTEÚDO DE TEXTO: MANTÉM O PADDING CORRETO ABAIXO DA IMAGEM */}
+            <div className="p-4 md:p-6 flex flex-col flex-grow">
+              <h3 className="text-sm md:text-base font-semibold text-gray-950 mb-2 md:mb-3 line-clamp-2 leading-snug">
                 {product.name}
               </h3>
-              <div className="mt-auto flex flex-col md:flex-row md:items-center justify-between gap-1 md:gap-0 pt-2">
-                <span className="text-[10px] md:text-xs text-gray-500">
-                  Tam: {product.sizes.join(", ")}
+              <div className="mt-auto flex flex-col md:flex-row md:items-center justify-between gap-1 md:gap-0 pt-3 border-t border-gray-100">
+                <span className="text-[11px] md:text-xs text-gray-500 font-medium">
+                  Tamanhos: {product.sizes.join(", ")}
                 </span>
-                <span className="text-[10px] md:text-sm font-medium text-blue-600">
+                <span className="text-[11px] md:text-sm font-semibold text-blue-600">
                   Ver Detalhes &rarr;
                 </span>
               </div>

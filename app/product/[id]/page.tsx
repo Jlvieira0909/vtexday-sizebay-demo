@@ -1,6 +1,8 @@
 import { products } from "@/lib/products";
 import { notFound } from "next/navigation";
 import Script from "next/script";
+import Link from "next/link";
+import ProductGallery from "../../../components/ProductGallery";
 
 export function generateStaticParams() {
   return products.map((product) => ({
@@ -21,76 +23,100 @@ export default async function ProductPage({
   }
 
   return (
-    <div className="bg-white rounded-xl md:rounded-3xl shadow-sm border border-gray-100 overflow-hidden p-4 md:p-12">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12">
-        <div className="relative aspect-[3/4] bg-gray-50 rounded-xl md:rounded-2xl overflow-hidden w-full max-w-sm mx-auto lg:max-w-none">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="object-cover w-full h-full"
+    <div className="max-w-5xl mx-auto">
+      <script
+        defer
+        id="sizebay-vfr-v4"
+        src="https://static.sizebay.technology/7707/prescript.js"
+      ></script>
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-950 mb-6 transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2.5}
+          stroke="currentColor"
+          className="w-4 h-4"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
           />
-        </div>
+        </svg>
+        Voltar para o catálogo
+      </Link>
 
-        <div className="flex flex-col space-y-4 md:space-y-6">
-          <h1 className="text-xl md:text-3xl font-bold text-gray-900">
-            {product.name}
-          </h1>
-          <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-            {product.description}
-          </p>
+      <div className="bg-white rounded-3xl md:rounded-4xl shadow-sm border border-gray-100 overflow-hidden p-6 md:p-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
+          <ProductGallery images={product.images} productName={product.name} />
 
-          <div>
-            <h3 className="text-xs md:text-sm font-medium text-gray-900 mb-2 md:mb-3">
-              Tamanhos Disponíveis
-            </h3>
-            <div className="flex gap-2 md:gap-3">
-              {product.sizes.map((size) => (
-                <div
-                  key={size}
-                  className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-gray-200 rounded-md md:rounded-lg text-xs md:text-sm text-gray-700 font-semibold"
-                >
-                  {size}
-                </div>
-              ))}
+          <div className="flex flex-col space-y-6 md:space-y-8">
+            <div className="space-y-3">
+              <h1 className="text-2xl md:text-4xl font-extrabold text-gray-950 tracking-tighter leading-tight">
+                {product.name}
+              </h1>
+              <p className="text-base md:text-lg text-gray-600 leading-relaxed font-normal">
+                {product.description}
+              </p>
             </div>
+
+            <div>
+              <h3 className="text-sm md:text-base font-semibold text-gray-950 mb-3 md:mb-4">
+                Tamanhos Disponíveis
+              </h3>
+              <div className="flex gap-2.5 md:gap-3">
+                {product.sizes.map((size) => (
+                  <div
+                    key={size}
+                    className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center border border-gray-200 rounded-xl text-sm md:text-base text-gray-950 font-bold hover:border-blue-600 hover:text-blue-600 transition-colors cursor-pointer"
+                  >
+                    {size}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <hr className="my-3 md:my-6 border-gray-100" />
+
+            <div className="bg-blue-50 p-6 md:p-8 rounded-3xl border border-blue-100">
+              <h3 className="text-base md:text-xl font-bold text-blue-950 mb-2">
+                Descubra o seu tamanho ideal
+              </h3>
+              <p className="text-sm md:text-base text-blue-800 mb-5 leading-relaxed">
+                Utilize nosso provador virtual ou tabela de medidas para
+                garantir o caimento perfeito.
+              </p>
+
+              <div
+                id="sizebay-vfr-container"
+                className="min-h-[44px] md:min-h-[50px] w-full flex items-center gap-4"
+              ></div>
+            </div>
+
+            <button className="mt-6 md:mt-10 w-full bg-gray-950 text-white py-4 md:py-5 rounded-2xl font-extrabold text-base md:text-lg hover:bg-gray-900 transition-colors shadow-sm">
+              Adicionar ao Carrinho
+            </button>
           </div>
-
-          <hr className="my-2 md:my-6 border-gray-200" />
-
-          <div className="bg-blue-50/50 p-4 md:p-6 rounded-xl md:rounded-2xl border border-blue-100">
-            <h3 className="text-sm md:text-lg font-semibold text-blue-900 mb-1 md:mb-2">
-              Descubra o seu tamanho ideal
-            </h3>
-            <p className="text-xs md:text-sm text-blue-700 mb-3 md:mb-4">
-              Utilize nosso provador virtual ou tabela de medidas para garantir
-              o caimento perfeito.
-            </p>
-
-            <div
-              id="sizebay-vfr-container"
-              className="min-h-[40px] md:min-h-[50px] w-full flex items-center gap-4"
-            ></div>
-          </div>
-
-          <button className="mt-4 md:mt-8 w-full bg-gray-900 text-white py-3 md:py-4 rounded-lg md:rounded-xl font-bold text-sm md:text-base hover:bg-gray-800 transition-colors">
-            Adicionar ao Carrinho
-          </button>
         </div>
-      </div>
 
-      <Script
-        id="sizebay-integration"
-        strategy="lazyOnload"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.Sizebay = window.Sizebay || {};
-            window.Sizebay.product = {
-               id: "${product.id}",
-               permalink: "https://www.sizebay-vtexday2026.com/${product.id}"
-            };
-          `,
-        }}
-      />
+        <Script
+          id="sizebay-integration"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.Sizebay = window.Sizebay || {};
+              window.Sizebay.product = {
+                 id: "${product.id}",
+                 permalink: "https://www.sizebay-vtexday2026.com/${product.id}"
+              };
+            `,
+          }}
+        />
+      </div>
     </div>
   );
 }

@@ -28,7 +28,7 @@ export default function RootLayout({
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
               <img
-                src="https://sizebay.com/wp-content/uploads/2022/04/Logo-Sizebay-Azul.svg"
+                src="https://d335luupugsy2.cloudfront.net/cms/files/933366/1744895900/$dupa1x2674h"
                 alt="Sizebay Logo"
                 className="h-5 md:h-6 object-contain"
               />
