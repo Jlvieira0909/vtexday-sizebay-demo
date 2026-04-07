@@ -66,8 +66,6 @@ export default async function ProductPage({
               <h3 className="text-sm md:text-base font-semibold text-gray-950 mb-3 md:mb-4">
                 Tamanhos Disponíveis
               </h3>
-
-              {/* O NOVO COMPONENTE SUBSTITUI A LÓGICA ANTIGA AQUI */}
               <SizeSelector sizes={product.sizes} />
             </div>
 

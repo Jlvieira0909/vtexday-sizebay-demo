@@ -1,5 +1,3 @@
-// app/page.tsx - RESTAURADO E AJUSTADO
-
 import Link from "next/link";
 import { products } from "@/lib/products";
 
@@ -21,21 +19,15 @@ export default function Home() {
           <Link
             key={product.id}
             href={`/product/${product.id}`}
-            // VOLTA A SER O CARD UNIFICADO PERFEITO, SEM SEPARAR AS INFORMAÇÕES
             className="group flex flex-col bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer"
           >
-            {/* CONTAINER DA IMAGEM: AGORA PREENCHE TUDO ATÉ O TOPO */}
             <div className="relative aspect-[3/4] w-full bg-gray-100 overflow-hidden">
               <img
-                // USANDO A PRIMEIRA IMAGEM DO ARRAY (products.images[0])
                 src={product.images[0]}
                 alt={product.name}
-                // CLASSES PARA COBRIR E ALINHAR AO TOPO, REMOVENDO O PADDING FEIO
                 className="object-cover object-top w-full h-full group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-
-            {/* CONTEÚDO DE TEXTO: MANTÉM O PADDING CORRETO ABAIXO DA IMAGEM */}
             <div className="p-4 md:p-6 flex flex-col flex-grow">
               <h3 className="text-sm md:text-base font-semibold text-gray-950 mb-2 md:mb-3 line-clamp-2 leading-snug">
                 {product.name}
