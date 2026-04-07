@@ -21,14 +21,14 @@ export default function ProductGallery({
         />
       </div>
 
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="flex gap-3 overflow-x-auto py-1 scrollbar-hide">
         {images.map((img, index) => (
           <button
             key={index}
             onClick={() => setMainImage(img)}
             className={`flex-none w-20 aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all p-0 ${
               mainImage === img
-                ? "border-blue-600 opacity-100 scale-105"
+                ? "border-blue-600 opacity-100"
                 : "border-transparent opacity-60 hover:opacity-100 hover:border-gray-300"
             }`}
           >
